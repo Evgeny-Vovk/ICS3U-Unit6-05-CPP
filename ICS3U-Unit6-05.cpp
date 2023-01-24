@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <list>
+#include <string>
 
 int smallestNumber(std::list<int> grades) {
     int mark;
@@ -23,21 +24,25 @@ int smallestNumber(std::list<int> grades) {
 int main() {
     // creating variables
     std::list<int> grades;
-    int mark = 0;
+    int mark;
     int average;
 
-    std::cout << "Please enter one mark at a time. Enter -1 to end.\n";
-    std::cout << "What is your mark? (as %): ";
-    std::cin >> mark;
-
-    while (mark != -1) {
-        grades.push_back(mark);
+    try {
+        std::cout << "Please enter one mark at a time. Enter -1 to end.\n";
         std::cout << "What is your mark? (as %): ";
         std::cin >> mark;
-    }
 
-    average = smallestNumber(grades);
-    std::cout << "\nThe average of all grades is " << average << ".";
+        while (mark != -1) {
+            grades.push_back(mark);
+            std::cout << "What is your mark? (as %): ";
+            std::cin >> mark;
+        }
+
+        average = smallestNumber(grades);
+        std::cout << "\nThe average of all grades is " << average << ".";
+    } catch(std::invalid_argument) {
+        std::cout << "Invalid input, please try again";
+    }
 
     std::cout << "\n\n\nDone.\n";
 }
